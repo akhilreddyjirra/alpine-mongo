@@ -12,10 +12,12 @@ RUN mkdir -p /data/db && \
 RUN mkdir /docker-entrypoint-initdb.d
 COPY ./db-setup.js /docker-entrypoint-initdb.d
 COPY ./data/config/mongod.conf /data/config
+# COPY ./init_db.sh /tmp
+# RUN chmod +x /tmp/init_db.sh
+# RUN /tmp/init_db.sh
 COPY ./docker-entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh && \
     chmod +x usr/local/bin/docker-entrypoint.sh
-
 VOLUME ["/data"]
 EXPOSE 27017
 
